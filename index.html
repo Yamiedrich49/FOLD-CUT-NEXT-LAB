@@ -38,6 +38,44 @@
 .flip-peek-idle{font-size:11px;color:#9fb8b5}
 @media(max-width:350px){.flip-goal{padding:13px 12px}.flip-goal-label{font-size:10px}.flip-goal-stack{width:148px}.goal-stack-layer{min-height:28px}.goal-stack-layer strong{font-size:15px}}
 
+
+/* LAB v2.3 — a stable camera and reachable controls on narrow touch screens */
+#app[data-view]{padding-bottom:calc(112px + env(safe-area-inset-bottom))}
+#app[data-view] .topbar{height:39px;margin-bottom:10px}
+#app[data-view] .game-head{padding-bottom:4px}
+#app[data-view] .game-title{font-size:clamp(24px,6.2vw,29px);margin:6px 0 2px}
+#app[data-view] .game-description{margin:2px 0 9px;line-height:1.45}
+#app[data-view] .progress{margin:8px 1px 10px}
+#app[data-view] .frame-top{padding:10px 16px 0;min-height:36px}
+#app[data-view] .frame-bottom{padding:9px 15px 10px;min-height:55px}
+#app[data-view] .buttons{position:fixed;z-index:20;bottom:calc(7px + env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);width:min(calc(100% - 26px),492px);display:flex;gap:8px;margin:0;padding:7px;border:1px solid rgba(201,231,220,.22);border-radius:20px;background:rgba(13,30,35,.96);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);box-shadow:0 10px 34px rgba(1,9,12,.45)}
+#app[data-view] .buttons .primary,#app[data-view] .buttons .secondary{height:47px;border-radius:13px}
+#app[data-view] .buttons .secondary{min-width:78px}
+.hinge-board-wrap{height:clamp(207px,38dvh,334px);position:relative;display:block;overflow:hidden;padding:0;touch-action:none!important}
+.hinge-board-wrap .hinge-svg{position:absolute;inset:0;width:100%;height:100%;max-width:none;max-height:none;overflow:visible;touch-action:none}
+.hinge-tile{outline:none}
+.hinge-tile .hinge-square{stroke-width:.055}
+.hinge-tile.chosen .hinge-square{stroke:#eac78d;stroke-width:.07}
+.hinge-handle-halo{fill:#203f42;fill-opacity:.20;stroke:#92cbb5;stroke-width:.07;pointer-events:none}
+.hinge-handle-core{fill:#e9c28d;stroke:#314b49;stroke-width:.062;pointer-events:none}
+.hinge-tile.chosen .hinge-handle-halo{stroke:#f4d59c;stroke-width:.1}
+.hinge-turn{min-width:52px;min-height:49px;touch-action:manipulation;font-size:23px}
+#app[data-view=hinge] .board-wrap{padding-left:5px;padding-right:5px}
+#app[data-view=hinge] .buttons{position:sticky;left:auto;transform:none;width:100%;margin-top:10px}
+#app[data-view=hinge] .smallbar{margin-top:14px}
+#app[data-view=hinge] .frame-bottom .hint{max-width:62%;font-size:11px;line-height:1.45}
+#app[data-view=hinge] .chapter{margin-top:3px}
+@media(max-height:700px){
+ #app[data-view] .topbar{height:34px;margin-bottom:5px}
+ #app[data-view] .game-head{padding-bottom:0}
+ #app[data-view] .game-title{font-size:23px;margin:3px 0}
+ #app[data-view] .game-description{margin:0 0 6px}
+ #app[data-view] .progress{margin:4px 1px 7px}
+ #app[data-view=hinge] .hinge-board-wrap{height:clamp(207px,38dvh,250px)}
+ #app[data-view=hinge] .frame-bottom{min-height:50px;padding:6px 12px}
+ #app[data-view=hinge] .frame-top{min-height:30px;padding-top:7px}
+ #app[data-view]:not([data-view=hinge]) .smallbar{margin-top:82px}
+}
 </style></head><body><main id="app"></main><script>
 'use strict';
 const DATA={"paper":[{"n":3,"edges":[[0,1],[1,2],[1,4],[3,4],[3,6],[4,5],[5,8],[6,7],[7,8]],"weak":[[0,1],[1,2],[1,4],[3,4],[3,6],[4,5],[5,8],[6,7],[7,8]],"red":[4],"blue":[1,2],"sol":[[1,4]]},{"n":3,"edges":[[0,1],[0,3],[1,2],[1,4],[3,4],[4,5],[4,7],[6,7],[7,8]],"weak":[[0,3],[1,4],[3,4],[4,5],[4,7],[6,7],[7,8]],"red":[7],"blue":[4,3],"sol":[[4,7]]},{"n":3,"edges":[[0,3],[1,2],[1,4],[2,5],[3,4],[3,6],[4,5],[4,7],[5,8],[6,7],[7,8]],"weak":[[0,3],[1,2],[1,4],[2,5],[3,6],[4,5],[6,7]],"red":[6],"blue":[1,5],"sol":[[3,6],[6,7]]},{"n":3,"edges":[[0,1],[1,2],[1,4],[2,5],[3,4],[4,5],[4,7],[5,8],[6,7],[7,8]],"weak":[[0,1],[1,2],[2,5],[3,4],[5,8],[7,8]],"red":[2],"blue":[4,3],"sol":[[1,2],[2,5]]},{"n":3,"edges":[[0,1],[1,2],[1,4],[2,5],[3,4],[3,6],[4,5],[4,7],[5,8],[7,8]],"weak":[[0,1],[1,2],[2,5],[3,4],[3,6],[4,5],[4,7],[5,8],[7,8]],"red":[2],"blue":[4,3],"sol":[[1,2],[2,5]]},{"n":4,"edges":[[0,1],[0,4],[1,2],[2,6],[3,7],[4,8],[5,6],[6,7],[6,10],[8,9],[8,12],[9,10],[10,11],[10,14],[11,15],[12,13],[13,14]],"weak":[[0,1],[0,4],[3,7],[8,9],[9,10],[10,14],[11,15],[12,13]],"red":[0],"blue":[3,2],"sol":[[0,1],[0,4]]},{"n":4,"edges":[[0,4],[1,2],[1,5],[2,6],[3,7],[4,5],[4,8],[5,6],[5,9],[6,7],[6,10],[8,9],[8,12],[9,13],[10,11],[10,14],[12,13],[13,14],[14,15]],"weak":[[0,4],[1,2],[5,6],[8,9],[8,12],[13,14]],"red":[15],"blue":[8,9],"sol":[[1,2],[5,6],[13,14]]},{"n":4,"edges":[[0,4],[1,2],[1,5],[2,3],[2,6],[4,5],[4,8],[5,9],[6,7],[6,10],[7,11],[8,12],[9,10],[9,13],[10,11],[11,15],[12,13],[13,14],[14,15]],"weak":[[1,5],[4,5],[5,9],[9,10],[10,11],[11,15]],"red":[13],"blue":[7,3],"sol":[[1,5],[9,10],[11,15]]},{"n":4,"edges":[[0,1],[1,2],[1,5],[3,7],[4,5],[5,6],[5,9],[6,7],[6,10],[7,11],[8,9],[9,10],[9,13],[10,11],[10,14],[11,15],[12,13],[13,14],[14,15]],"weak":[[4,5],[6,7],[6,10],[9,13],[10,11],[10,14],[11,15]],"red":[8],"blue":[13,12],"sol":[[9,13],[10,14],[11,15]]},{"n":4,"edges":[[0,1],[1,2],[1,5],[2,3],[2,6],[3,7],[4,5],[4,8],[5,6],[5,9],[6,7],[6,10],[8,9],[8,12],[9,13],[10,11],[12,13],[13,14],[14,15]],"weak":[[0,1],[1,2],[2,6],[3,7],[4,5],[6,10],[8,9],[8,12],[9,13]],"red":[3,0],"blue":[4,1],"sol":[[0,1],[1,2],[2,6],[3,7]]},{"n":4,"edges":[[0,1],[0,4],[1,2],[1,5],[2,3],[2,6],[5,9],[6,10],[7,11],[8,9],[8,12],[9,10],[9,13],[10,11],[10,14],[12,13],[13,14],[14,15]],"weak":[[0,1],[0,4],[1,2],[1,5],[2,3],[7,11],[8,12],[9,10],[9,13]],"red":[13,14],"blue":[5,4],"sol":[[1,2],[8,12],[9,10],[9,13]]},{"n":4,"edges":[[0,1],[0,4],[1,2],[1,5],[2,3],[4,5],[4,8],[5,6],[5,9],[6,7],[7,11],[8,9],[8,12],[9,10],[9,13],[10,11],[10,14],[12,13],[14,15]],"weak":[[0,4],[2,3],[4,5],[4,8],[5,9],[6,7],[8,12],[9,13],[10,11],[10,14]],"red":[1,6],"blue":[11,8],"sol":[[4,8],[5,9],[6,7]]}],"hinge":[{"n":3,"goal":[0,3],"steps":1},{"n":3,"goal":[3,3],"steps":2},{"n":4,"goal":[2,0,0],"steps":2},{"n":4,"goal":[2,3,0],"steps":3},{"n":4,"goal":[2,3,3],"steps":4},{"n":5,"goal":[0,2,0,3],"steps":3},{"n":5,"goal":[2,3,3,0],"steps":4},{"n":5,"goal":[3,2,3,3],"steps":5},{"n":6,"goal":[0,2,0,3,3],"steps":4},{"n":6,"goal":[3,2,3,3,0],"steps":5},{"n":6,"goal":[2,3,0,3,2],"steps":6},{"n":7,"goal":[2,3,0,3,3,2],"steps":7}],"flip":[{"n":3,"target":[[1,1],[0,0],[2,0]]},{"n":3,"target":[[0,1],[2,1],[1,0]]},{"n":4,"target":[[1,1],[0,0],[3,1],[2,0]]},{"n":4,"target":[[2,1],[0,1],[1,0],[3,0]]},{"n":4,"target":[[2,1],[1,0],[0,1],[3,0]]},{"n":5,"target":[[2,1],[4,1],[3,0],[0,1],[1,0]]},{"n":5,"target":[[1,1],[0,0],[4,0],[3,1],[2,0]]},{"n":5,"target":[[4,1],[2,1],[0,1],[1,0],[3,0]]},{"n":6,"target":[[4,1],[3,0],[2,1],[0,1],[1,0],[5,0]]},{"n":6,"target":[[3,1],[2,0],[5,1],[0,0],[1,1],[4,0]]},{"n":7,"target":[[0,1],[4,1],[3,0],[2,1],[6,1],[5,0],[1,0]]},{"n":7,"target":[[5,1],[1,1],[2,0],[3,1],[0,0],[4,0],[6,0]]}]};
@@ -51,11 +89,11 @@ let audio=null;function sound(type='tick'){if(!saved.sound)return;try{audio=audi
 let game=null,levelIndex=0,state=null,winning=false,feedbackOpen=false,animToken=0;const app=document.querySelector('#app');const isDone=(k,i)=>saved.progress[k].done.includes(i);const currentPuzzle=()=>DATA[game][levelIndex];
 function topbar(){return `<header class="topbar"><div class="identity"><div class="logo"><svg width="23" height="23" viewBox="0 0 24 24" fill="none"><path d="M4 18V6h16v12H4Z" stroke="currentColor" stroke-width="1.3"/><path d="m4 18 8-8 8 8M12 10V6" stroke="currentColor" stroke-opacity=".7" stroke-width="1.2"/></svg></div><div class="brand">FOLD & CUT <small>NEXT / PAPER LAB</small></div></div><button type="button" class="icon-btn" data-act="sound" aria-label="効果音を切り替える">${icon(saved.sound?'volume':'mute')}</button></header>`}
 function visual(k){if(k==='paper')return `<svg viewBox="0 0 126 114"><rect x="21" y="8" width="86" height="96" rx="11" fill="#f2edde" transform="rotate(-6 64 56)"/><path d="M21 39 107 31M15 77 101 69" stroke="#a9ab9d" stroke-opacity=".35" stroke-dasharray="2 4"/><path d="M42 19v76M79 13v78" stroke="#cbaa83" stroke-width="2.2" stroke-dasharray="3 5"/><circle cx="59" cy="49" r="9" fill="#e5a397"/><circle cx="83" cy="77" r="9" fill="#8ecfbe"/><path d="M29 85q11 8 27 2" stroke="#805f51" stroke-width="1.5" fill="none"/></svg>`;if(k==='hinge')return `<svg viewBox="0 0 126 114"><g transform="translate(24 13) rotate(-13 40 47)"><rect x="0" y="0" width="43" height="43" rx="3" fill="#efe7d9"/><rect x="43" y="0" width="43" height="43" rx="3" fill="#d3eadb"/><rect x="43" y="43" width="43" height="43" rx="3" fill="#ebe7d9"/><circle cx="43" cy="0" r="5.5" fill="#234d4b" stroke="#e9bb91" stroke-width="2"/><circle cx="86" cy="43" r="5.5" fill="#234d4b" stroke="#e9bb91" stroke-width="2"/><path d="M50 22a17 17 0 0 1 23 1" stroke="#548d7a" stroke-width="1.5" fill="none"/></g></svg>`;return `<svg viewBox="0 0 126 114"><g transform="translate(8 14)"><rect x="9" y="8" width="42" height="78" rx="7" fill="#eee7d8"/><rect x="44" y="8" width="42" height="78" rx="7" fill="#c6b6f1"/><path d="M42 12v70" stroke="#6c6587" stroke-dasharray="2 4"/><path d="m72 28-12-10v20Z" fill="#8075ac" opacity=".55"/><text x="28" y="59" font-size="30" fill="#31454c" text-anchor="middle" font-weight="700">1</text><text x="65" y="59" font-size="30" fill="#433956" text-anchor="middle" font-weight="700">2</text></g></svg>`}
-function home(){game=null;state=null;winning=false;document.querySelector('.win')?.remove();app.innerHTML=topbar()+`<section class="hero"><div class="eyebrow">EXPERIMENTAL PUZZLE STUDIO · VOL. 02</div><h1>触れて、考える。</h1><p>一枚の紙から、まだ見たことのないひらめきへ。<br>3つの小さな実験を、指先で。</p></section><div class="rule"></div><div class="catalog-head"><strong>EXPERIMENTS</strong><span>3 STUDIES / 36 LEVELS</span></div><div class="games">${Object.keys(META).map(k=>{let m=META[k],p=saved.progress[k];return `<button class="game-card" data-act="enter" data-game="${k}" style="--accent:${m.color}"><span class="card-visual">${visual(k)}</span><span class="card-content"><span class="card-no">STUDY ${m.id}</span><span class="card-title">${m.name}</span><span class="card-sub">${m.sub}</span><span class="card-foot">${p.done.length} / 12 COMPLETE<span style="color:var(--accent)">·</span> PLAY</span></span><span class="card-arrow">${icon('right')}</span></button>`}).join('')}</div><div class="legacy-note">前回の有望作：<a href="./layer-lock-v1.html">LAYER LOCK（保管版）</a></div><div class="footer">小さな操作に、深い発見を。<br>FOLD & CUT NEXT LAB · CONCEPT STUDIES</div>`}
-function start(k,i=0){if(!META[k])return;game=k;levelIndex=Math.max(0,Math.min(i,DATA[k].length-1,saved.progress[k].unlocked-1));winning=false;feedbackOpen=false;animToken++;document.querySelector('.win')?.remove();let l=currentPuzzle();if(k==='paper')state={cut:new Set(),reveal:false,passed:false,busy:false};if(k==='hinge'){history.hinge=[];state={d:Array(l.n-1).fill(0),selected:1,dragging:false}};if(k==='flip')state={cols:Array.from({length:l.n},(_,id)=>[[id,1]]),selected:0,history:[],peeking:false,busy:false};render();window.scrollTo({top:0,behavior:'instant'})}
+function home(){app.removeAttribute('data-view');game=null;state=null;winning=false;document.querySelector('.win')?.remove();app.innerHTML=topbar()+`<section class="hero"><div class="eyebrow">EXPERIMENTAL PUZZLE STUDIO · VOL. 02</div><h1>触れて、考える。</h1><p>一枚の紙から、まだ見たことのないひらめきへ。<br>3つの小さな実験を、指先で。</p></section><div class="rule"></div><div class="catalog-head"><strong>EXPERIMENTS</strong><span>3 STUDIES / 36 LEVELS</span></div><div class="games">${Object.keys(META).map(k=>{let m=META[k],p=saved.progress[k];return `<button class="game-card" data-act="enter" data-game="${k}" style="--accent:${m.color}"><span class="card-visual">${visual(k)}</span><span class="card-content"><span class="card-no">STUDY ${m.id}</span><span class="card-title">${m.name}</span><span class="card-sub">${m.sub}</span><span class="card-foot">${p.done.length} / 12 COMPLETE<span style="color:var(--accent)">·</span> PLAY</span></span><span class="card-arrow">${icon('right')}</span></button>`}).join('')}</div><div class="legacy-note">前回の有望作：<a href="./layer-lock-v1.html">LAYER LOCK（保管版）</a></div><div class="footer">小さな操作に、深い発見を。<br>FOLD & CUT NEXT LAB · CONCEPT STUDIES</div>`}
+function start(k,i=0){if(!META[k])return;game=k;levelIndex=Math.max(0,Math.min(i,DATA[k].length-1,saved.progress[k].unlocked-1));winning=false;feedbackOpen=false;animToken++;document.querySelector('.win')?.remove();let l=currentPuzzle();if(k==='paper')state={cut:new Set(),reveal:false,passed:false,busy:false};if(k==='hinge'){history.hinge=[];state={d:Array(l.n-1).fill(0),selected:1,dragging:false,camera:hingeCamera(l)}};if(k==='flip')state={cols:Array.from({length:l.n},(_,id)=>[[id,1]]),selected:0,history:[],peeking:false,busy:false};render();window.scrollTo({top:0,behavior:'instant'})}
 function heading(){let m=META[game],pr=saved.progress[game];return `${topbar()}<div style="--accent:${m.color}"><div class="game-head"><button class="back" data-act="home">${icon('back')} ALL STUDIES</button><span class="step-label">${String(levelIndex+1).padStart(2,'0')} / ${String(DATA[game].length).padStart(2,'0')}</span></div><h1 class="game-title">${m.name}</h1><p class="game-description">${m.desc}</p><div class="progress">${DATA[game].map((_,i)=>`<span class="${isDone(game,i)?'done':''} ${i===levelIndex?'now':''}"></span>`).join('')}</div>`}
-function footer(){let k=game,p=saved.progress[k];return `<div class="smallbar"><span class="preview-label">LEVEL SELECT</span><button class="mini-btn" data-act="reset">${icon('restart')} はじめから</button></div><div class="chapter">${DATA[k].map((_,i)=>`<button class="level ${i===levelIndex?'active':''} ${isDone(k,i)?'done':''} ${i>=p.unlocked?'locked':''}" data-act="level" data-i="${i}" ${i>=p.unlocked?'disabled':''}>${String(i+1).padStart(2,'0')}</button>`).join('')}</div><button class="review" data-act="feedback">${feedbackOpen?'感想欄を閉じる':'この試作への感想を記録する ＋'}</button>${feedbackOpen?`<section class="feedback-zone"><p>ゲーム名と問題番号を付けてコピーします。気になったことを、そのままチャットへ。</p><textarea id="feed" placeholder="例：第4問、どこが動くのか分かりにくかった"></textarea><button data-act="copy">フィードバックをコピー</button></section>`:''}<p class="fine">LAB v2.2 · 数学的に解の存在を確認した研究用問題です。</p></div>`}
-function render(){if(!game){home();return}app.innerHTML=heading()+(game==='paper'?paperUI():game==='hinge'?hingeUI():flipUI())+footer()}
+function footer(){let k=game,p=saved.progress[k];return `<div class="smallbar"><span class="preview-label">LEVEL SELECT</span><button class="mini-btn" data-act="reset">${icon('restart')} はじめから</button></div><div class="chapter">${DATA[k].map((_,i)=>`<button class="level ${i===levelIndex?'active':''} ${isDone(k,i)?'done':''} ${i>=p.unlocked?'locked':''}" data-act="level" data-i="${i}" ${i>=p.unlocked?'disabled':''}>${String(i+1).padStart(2,'0')}</button>`).join('')}</div><button class="review" data-act="feedback">${feedbackOpen?'感想欄を閉じる':'この試作への感想を記録する ＋'}</button>${feedbackOpen?`<section class="feedback-zone"><p>ゲーム名と問題番号を付けてコピーします。気になったことを、そのままチャットへ。</p><textarea id="feed" placeholder="例：第4問、どこが動くのか分かりにくかった"></textarea><button data-act="copy">フィードバックをコピー</button></section>`:''}<p class="fine">LAB v2.3 · 数学的に解の存在を確認した研究用問題です。</p></div>`}
+function render(){if(!game){home();return}app.dataset.view=game;app.innerHTML=heading()+(game==='paper'?paperUI():game==='hinge'?hingeUI():flipUI())+footer()}
 function toast(msg){let t=document.querySelector('.toast');if(t)t.remove();t=document.createElement('div');t.className='toast';t.textContent=msg;document.body.appendChild(t);setTimeout(()=>t.remove(),2050)}
 function done(){if(winning)return;winning=true;let k=game,p=saved.progress[k];if(!p.done.includes(levelIndex))p.done.push(levelIndex);p.unlocked=Math.max(p.unlocked,Math.min(levelIndex+2,DATA[k].length));persist();sound('win');let last=levelIndex===DATA[k].length-1;let el=document.createElement('section');el.className='win';el.innerHTML=`<div class="win-card" role="dialog" aria-modal="true" aria-label="クリア"><div class="win-symbol">${icon('tick')}</div><div class="win-kicker">EXPERIMENT COMPLETE</div><h2>${last?'Beautiful work.':'ひらめき、成功。'}</h2><p>${last?'12問すべてに到達しました。次は別の実験へ。':'STUDY '+META[k].id+' · LEVEL '+String(levelIndex+1).padStart(2,'0')+' をクリア。'}</p><button class="primary" style="width:100%;--accent:${META[k].color}" data-act="${last?'home':'next'}">${last?'ラボに戻る':'次の問題へ'} ${icon('right')}</button><button class="secondary" data-act="home">別の実験を遊ぶ</button></div>`;document.body.appendChild(el)}
 function celebrate(delay=650){let token=++animToken;setTimeout(()=>{if(token===animToken&&game&&!winning)done()},delay)}
@@ -76,7 +114,31 @@ function qr(x,y,r){for(let t=0;t<((r%4)+4)%4;t++){let v=x;x=-y;y=v}return [x,y]}
 function hingeGeom(d){let origin=[0,0],r=0,out=[];for(let i=0;i<=d.length;i++){if(i>0)r=(r+d[i-1])%4;const q=[[0,0],[1,0],[1,1],[0,1]].map(([x,y])=>{let a=qr(x,y,r);return [origin[0]+a[0],origin[1]+a[1]]});const min=[Math.min(...q.map(v=>v[0])),Math.min(...q.map(v=>v[1]))];out.push({r,origin:[...origin],corners:q,cell:min});const v=qr(1,0,r);origin=[origin[0]+v[0],origin[1]+v[1]]}return out}
 function hingeLegal(d){let g=hingeGeom(d);return new Set(g.map(o=>o.cell.join(','))).size===g.length}
 function hingeMatch(d,goal){const a=hingeGeom(d).map(v=>v.cell.join(',')).sort().join('|'),b=hingeGeom(goal).map(v=>v.cell.join(',')).sort().join('|');return a===b}
-function hingeUI(){const l=currentPuzzle(),g=hingeGeom(state.d),gg=hingeGeom(l.goal),all=[...g,...gg];let loX=Math.min(...all.map(o=>o.cell[0])),hiX=Math.max(...all.map(o=>o.cell[0]+1)),loY=Math.min(...all.map(o=>o.cell[1])),hiY=Math.max(...all.map(o=>o.cell[1]+1));const pad=.7;let w=hiX-loX+2*pad,h=hiY-loY+2*pad;let size=Math.max(w,h,4.8);let x=loX-(size-w)/2-pad,y=loY-(size-h)/2-pad;let view=[x,y,size,size].join(' ');let goalSvg=gg.map(a=>`<rect class="hinge-ghost" x="${a.cell[0]+.05}" y="${a.cell[1]+.05}" width=".9" height=".9" rx=".065"/>`).join('');let tiles=g.map((a,i)=>{let pts=a.corners.map(v=>v.join(',')).join(' ');let cx=a.corners.reduce((q,v)=>q+v[0],0)/4,cy=a.corners.reduce((q,v)=>q+v[1],0)/4;return `<g class="hinge-tile ${state.selected===i?'chosen':''}" data-piece="${i}"><polygon class="hinge-square" points="${pts}"/><circle cx="${cx}" cy="${cy}" r=".10" fill="#7eaaa0" opacity=".5"/><text class="hinge-index" x="${cx}" y="${cy}">${i+1}</text>${i>0?`<circle class="hinge-joint" cx="${a.origin[0]}" cy="${a.origin[1]}" r=".10"/>`:''}<polygon class="hinge-touch" points="${pts}"/>${i>0?`<circle class="hinge-grab" cx="${a.origin[0]}" cy="${a.origin[1]}" r=".28" fill="transparent" pointer-events="all"/>`:``}</g>`}).join('');return `<section class="frame" style="--accent:${META.hinge.color}"><div class="frame-top"><span class="kicker">SHAPE / CHANGE</span><span class="goal-badge">点線の形をつくろう</span></div><div class="board-wrap hinge-board-wrap"><svg class="hinge-svg" id="hinge-board" viewBox="${view}" aria-label="蝶番で連動する紙片。2枚目以降を動かす"><defs><filter id="tileShadow" x="-.4" y="-.4" width="1.8" height="1.8"><feDropShadow dx="0" dy=".045" stdDeviation=".05" flood-color="#07181b" flood-opacity=".24"/></filter></defs>${goalSvg}${tiles}</svg></div><div class="frame-bottom"><div class="hint"><strong style="color:#e0eee1">${state.selected===0?'先頭の紙は固定':`紙片 ${state.selected+1} を選択中`}</strong><br>紙片を動かすと、それより先も一緒に回る。</div><div class="hinge-choices"><button class="hinge-turn" data-act="hinge-turn" data-dir="-1" aria-label="反時計回りに90度" ${state.selected===0?'disabled':''}>↶</button><button class="hinge-turn" data-act="hinge-turn" data-dir="1" aria-label="時計回りに90度" ${state.selected===0?'disabled':''}>↷</button></div></div></section><div class="buttons"><button class="secondary" data-act="hinge-undo">一手戻す</button><button class="primary" data-act="hinge-check">形を確かめる ${icon('right')}</button></div>`}
+function hingeCamera(l){
+ const initial=Array(l.n-1).fill(0),poses=[initial,l.goal];
+ // Camera is determined at level entry — never from the current finger movement.
+ // Include one-turn neighbors so experimenting does not immediately leave the frame.
+ for(const base of [initial,l.goal])for(let j=0;j<base.length;j++)for(const dir of [-1,1]){
+  const next=base.slice();next[j]=(next[j]+dir+4)%4;if(hingeLegal(next))poses.push(next);
+ }
+ const all=poses.flatMap(hingeGeom);const xs=all.flatMap(q=>q.corners.map(pt=>pt[0]));const ys=all.flatMap(q=>q.corners.map(pt=>pt[1]));
+ const minX=Math.min(...xs),maxX=Math.max(...xs),minY=Math.min(...ys),maxY=Math.max(...ys);
+ const width=maxX-minX,height=maxY-minY;
+ // A fixed, intentional scale per puzzle, not the previous automatic zoom.
+ const size=Math.max(5.0,width+1.4,height+1.4,l.n+1.1);
+ return {view:[(minX+maxX-size)/2,(minY+maxY-size)/2,size,size].join(' '),size};
+}
+function hingeUI(){
+ const l=currentPuzzle(),g=hingeGeom(state.d),gg=hingeGeom(l.goal);
+ const goalSvg=gg.map(a=>`<rect class="hinge-ghost" x="${a.cell[0]+.05}" y="${a.cell[1]+.05}" width=".9" height=".9" rx=".065"/>`).join('');
+ const tiles=g.map((a,i)=>{
+  const pts=a.corners.map(v=>v.join(',')).join(' ');
+  const cx=a.corners.reduce((q,v)=>q+v[0],0)/4,cy=a.corners.reduce((q,v)=>q+v[1],0)/4;
+  const halo=i>0?`<circle class="hinge-handle-halo" cx="${a.origin[0]}" cy="${a.origin[1]}" r=".21"/><circle class="hinge-handle-core" cx="${a.origin[0]}" cy="${a.origin[1]}" r=".086"/>`:'';
+  return `<g class="hinge-tile ${state.selected===i?'chosen':''}" data-piece="${i}"><polygon class="hinge-square" points="${pts}"/><circle cx="${cx}" cy="${cy}" r=".10" fill="#7eaaa0" opacity=".5"/><text class="hinge-index" x="${cx}" y="${cy}">${i+1}</text><polygon class="hinge-touch" points="${pts}"/>${halo}</g>`;
+ }).join('');
+ return `<section class="frame" style="--accent:${META.hinge.color}"><div class="frame-top"><span class="kicker">SHAPE / CHANGE</span><span class="goal-badge">点線の形をつくろう</span></div><div class="board-wrap hinge-board-wrap"><svg class="hinge-svg" id="hinge-board" viewBox="${state.camera.view}" aria-label="蝶番で連動する紙片。触れて90度ずつ動かす"><defs><filter id="tileShadow" x="-.4" y="-.4" width="1.8" height="1.8"><feDropShadow dx="0" dy=".045" stdDeviation=".05" flood-color="#07181b" flood-opacity=".24"/></filter></defs>${goalSvg}${tiles}</svg></div><div class="frame-bottom"><div class="hint"><strong style="color:#e0eee1">${state.selected===0?'先頭の紙は固定':`紙片 ${state.selected+1} を選択中`}</strong><br>紙片を指で回す。90°でカチッと止まる。</div><div class="hinge-choices"><button class="hinge-turn" data-act="hinge-turn" data-dir="-1" aria-label="反時計回りに90度" ${state.selected===0?'disabled':''}>↶</button><button class="hinge-turn" data-act="hinge-turn" data-dir="1" aria-label="時計回りに90度" ${state.selected===0?'disabled':''}>↷</button></div></div></section><div class="buttons"><button class="secondary" data-act="hinge-undo">一手戻す</button><button class="primary" data-act="hinge-check">形を確かめる ${icon('right')}</button></div>`;
+}
 // FLIP STACK — reversible folding of contiguous panels. Each fold reverses layer order and flips front/back.
 function ffold(cols,k,dir){const n=cols.length;if(k<1||k>=n)return null;if(dir==='L'&&k>n-k||dir==='R'&&n-k>k)return null;let d={};let fixed=dir==='L'?Array.from({length:n-k},(_,i)=>k+i):Array.from({length:k},(_,i)=>i);for(const j of fixed)d[j]=cols[j].map(v=>[...v]);let moved=dir==='L'?Array.from({length:k},(_,i)=>i):Array.from({length:n-k},(_,i)=>k+i);for(const j of moved){let target=2*k-1-j;if(!d[target])return null;d[target].push(...cols[j].slice().reverse().map(([id,up])=>[id,up?0:1]))}return Object.keys(d).map(Number).sort((a,b)=>a-b).map(i=>d[i])}
 function faceColor(id){return ['#eac5a3','#a9d7cf','#d6c2e9','#eadfa2','#b7cbe9','#e1bac8','#c4dac0','#a8bed1'][id%8]}
@@ -88,24 +150,95 @@ function paperCheck(){let l=currentPuzzle(),s=state;if(s.busy)return;if(s.cut.si
 function hingeTurn(dir){let l=currentPuzzle(),s=state,j=s.selected-1;if(j<0)return;let d=s.d.slice();d[j]=(d[j]+dir+4)%4;if(!hingeLegal(d)){sound('wrong');app.querySelector('#hinge-board')?.classList.add('buzz');toast('紙が重なってしまう');return}history.hinge.push(s.d.slice());s.d=d;sound('fold');render()}
 function hingeCheck(){let l=currentPuzzle();if(hingeMatch(state.d,l.goal)){sound('tick');celebrate(420);app.querySelector('.hinge-svg')?.classList.add('solved')}else{sound('wrong');toast('点線の形と、まだ少し違う')}}
 function flipDo(k,dir){let s=state,cols=ffold(s.cols,k,dir);if(!cols){sound('wrong');toast('その折り方では紙がはみ出す');return}if(s.busy)return;s.history.push(s.cols.map(p=>p.map(v=>[...v])));s.busy=true;sound('fold');app.querySelector('.flip-sheet')?.classList.add('is-folding');let all=Array.from(app.querySelectorAll('.flip-column'));all.forEach((el,j)=>{if((dir==='L'&&j<k)||(dir==='R'&&j>=k)){const target=2*k-1-j;const dst=all[target];if(!dst)return;const dx=dst.getBoundingClientRect().left-el.getBoundingClientRect().left;el.style.zIndex='8';el.style.transition='transform .39s cubic-bezier(.2,.75,.2,1),opacity .39s';requestAnimationFrame(()=>{el.style.transform=`translateX(${dx}px) rotateY(160deg)`;el.style.opacity='.72'})}});const token=animToken;setTimeout(()=>{if(game!=='flip'||state!==s||token!==animToken)return;s.cols=cols;s.selected=Math.min(s.selected,cols.length-1);s.busy=false;s.peeking=false;render();if(cols.length===1&&flipIsSolved(currentPuzzle(),cols))celebrate(740)},390)}
-function processAction(act,node){if(act==='sound'){saved.sound=!saved.sound;persist();sound();if(game)render();else home();return}if(act==='home'){animToken++;home();window.scrollTo(0,0);return}if(act==='enter'){start(node.dataset.game);sound();return}if(act==='level'){start(game,Number(node.dataset.i));sound();return}if(act==='next'){start(game,levelIndex+1);return}if(act==='reset'){start(game,levelIndex);sound();return}if(act==='feedback'){feedbackOpen=!feedbackOpen;render();return}if(act==='copy'){let text=`PAPER LAB v2.2\nゲーム：${META[game].name}\n問題：${levelIndex+1}/12\n${app.querySelector('#feed')?.value||''}`;navigator.clipboard?.writeText(text).then(()=>toast('コピーしました')).catch(()=>toast('コピーできませんでした'));return}if(winning||!game)return;
+function processAction(act,node){if(act==='sound'){saved.sound=!saved.sound;persist();sound();if(game)render();else home();return}if(act==='home'){animToken++;home();window.scrollTo(0,0);return}if(act==='enter'){start(node.dataset.game);sound();return}if(act==='level'){start(game,Number(node.dataset.i));sound();return}if(act==='next'){start(game,levelIndex+1);return}if(act==='reset'){start(game,levelIndex);sound();return}if(act==='feedback'){feedbackOpen=!feedbackOpen;render();return}if(act==='copy'){let text=`PAPER LAB v2.3\nゲーム：${META[game].name}\n問題：${levelIndex+1}/12\n${app.querySelector('#feed')?.value||''}`;navigator.clipboard?.writeText(text).then(()=>toast('コピーしました')).catch(()=>toast('コピーできませんでした'));return}if(winning||!game)return;
 if(game==='paper'){if(act==='paper-undo'){let last=[...state.cut].at(-1);if(last)state.cut.delete(last);sound();render()}if(act==='paper-check')paperCheck();return}
 if(game==='hinge'){if(act==='hinge-turn')hingeTurn(Number(node.dataset.dir));if(act==='hinge-undo'){let p=history.hinge.pop();if(p){state.d=p;sound();render()}}if(act==='hinge-check')hingeCheck();return}
 if(game==='flip'){if(act==='flip-fold')flipDo(Number(node.dataset.k),node.dataset.dir);if(act==='flip-undo'){let last=state.history.pop();if(last){state.cols=last;state.selected=0;state.peeking=false;sound();render()}}if(act==='flip-check'){if(flipIsSolved(currentPuzzle(),state.cols))celebrate(500);else{sound('wrong');toast('山の順番・表裏が目標と違う')}}}}
-document.addEventListener('click',e=>{let node=e.target.closest('[data-act]');if(node){processAction(node.dataset.act,node);return}let seam=e.target.closest('[data-edge]');if(seam&&game==='paper'){paperCut(seam.dataset.edge);return}let p=e.target.closest('[data-piece]');if(p&&game==='hinge'&&!hDrag?.moved){state.selected=Number(p.dataset.piece);render();return}/* flip cards are handled at pointerup to avoid duplicate click toggles */});
+let hingeIgnoreClickUntil=0;
+document.addEventListener('click',e=>{let node=e.target.closest('[data-act]');if(node){processAction(node.dataset.act,node);return}let seam=e.target.closest('[data-edge]');if(seam&&game==='paper'){paperCut(seam.dataset.edge);return}let p=e.target.closest('[data-piece]');if(p&&game==='hinge'&&performance.now()>hingeIgnoreClickUntil){state.selected=Number(p.dataset.piece);render();return}/* flip cards handled at pointerup */});
 app.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){let seam=e.target.closest('[data-edge]');if(seam){e.preventDefault();paperCut(seam.dataset.edge)}let c=e.target.closest('[data-flip-col]');if(c){e.preventDefault();state.selected=Number(c.dataset.flipCol);state.peeking=!state.peeking;render()}}});
-// A folding gesture belongs to the paper, never to the browser viewport. Safari needs a non-passive TouchEvent guard as well as touch-action:none on nested SVG nodes.
+// Gesture area owns touch; normal page scrolling remains available elsewhere.
 function guardHingeTouch(e){if(game==='hinge'&&e.target.closest?.('.hinge-board-wrap')&&e.cancelable)e.preventDefault()}
 document.addEventListener('touchstart',guardHingeTouch,{passive:false,capture:true});
 document.addEventListener('touchmove',guardHingeTouch,{passive:false,capture:true});
-let hDrag=null,flipDrag=null;function svgPoint(svg,x,y){let p=svg.createSVGPoint();p.x=x;p.y=y;let m=svg.getScreenCTM();return m?p.matrixTransform(m.inverse()):p}
-app.addEventListener('pointerdown',e=>{if(winning)return;if(game==='hinge'){let p=e.target.closest('[data-piece]');if(!p)return;let i=Number(p.dataset.piece);if(i<1)return;const svg=app.querySelector('#hinge-board'),g=hingeGeom(state.d),pivot=g[i].origin,pt=svgPoint(svg,e.clientX,e.clientY);hDrag={i,svg,pivot,a0:Math.atan2(pt.y-pivot[1],pt.x-pivot[0]),last:0,moved:false,token:animToken};try{svg.setPointerCapture?.(e.pointerId)}catch(_){}e.preventDefault()}
-if(game==='flip'){let p=e.target.closest('[data-flip-col]');if(!p)return;flipDrag={col:Number(p.dataset.flipCol),startX:e.clientX,lastX:e.clientX,moved:false,token:animToken};p.setPointerCapture?.(e.pointerId)}});
-app.addEventListener('pointermove',e=>{if(hDrag&&game==='hinge'){const d=hDrag,p=svgPoint(d.svg,e.clientX,e.clientY);let da=Math.atan2(Math.sin(Math.atan2(p.y-d.pivot[1],p.x-d.pivot[0])-d.a0),Math.cos(Math.atan2(p.y-d.pivot[1],p.x-d.pivot[0])-d.a0));d.last=da;d.moved||=Math.abs(da)>.16;let angle=da*180/Math.PI;const g=d.svg.querySelectorAll('[data-piece]');g.forEach((el,i)=>{if(i>=d.i)el.setAttribute('transform',`rotate(${angle} ${d.pivot[0]} ${d.pivot[1]})`)});e.preventDefault()}
-if(flipDrag&&game==='flip'){flipDrag.lastX=e.clientX;if(Math.abs(e.clientX-flipDrag.startX)>17)flipDrag.moved=true}});
-function finishDrag(e){if(hDrag){let d=hDrag;hDrag=null;if(e.type==='pointercancel'){render();return}if(game!=='hinge'||d.token!==animToken)return;let dir=Math.sign(d.last);state.selected=d.i;if(d.moved&&Math.abs(d.last)>.38){let old=state.d.slice();let idx=d.i-1;old[idx]=(old[idx]+dir+4)%4;if(hingeLegal(old)){history.hinge.push(state.d.slice());state.d=old;sound('fold')}else{sound('wrong');toast('紙が重なってしまう')}}render();return}
-if(flipDrag){let d=flipDrag;flipDrag=null;if(game!=='flip'||d.token!==animToken)return;state.selected=d.col;let dx=d.lastX-d.startX;if(d.moved&&Math.abs(dx)>36){let dir=dx>0?'L':'R',k=dx>0?d.col+1:d.col;flipDo(k,dir)}else{state.peeking=!state.peeking;render()}return}}
-app.addEventListener('pointerup',finishDrag);app.addEventListener('pointercancel',e=>{if(hDrag){hDrag=null;if(game==='hinge')render();return}finishDrag(e)});
+let hDrag=null,flipDrag=null;
+function svgPoint(svg,x,y){let p=svg.createSVGPoint();p.x=x;p.y=y;let m=svg.getScreenCTM();return m?p.matrixTransform(m.inverse()):p}
+function hingePick(svg,e){
+ const g=hingeGeom(state.d),pt=svgPoint(svg,e.clientX,e.clientY);
+ const ctm=svg.getScreenCTM(), pxPerUnit=ctm?Math.hypot(ctm.a,ctm.b):50;
+ const grab=32/pxPerUnit,tilePad=15/pxPerUnit;
+ let best=-1,dist=Infinity;
+ // Generous 64 px diameter around every hinge; nearer hinge wins.
+ for(let i=1;i<g.length;i++){
+  const [x,y]=g[i].origin;const d=Math.hypot(pt.x-x,pt.y-y);
+  if(d<=grab&&d<dist){best=i;dist=d}
+ }
+ if(best>=0)return best;
+ // Also allow grabbing anywhere on or slightly beyond a movable panel.
+ for(let i=1;i<g.length;i++){
+  const xs=g[i].corners.map(p=>p[0]),ys=g[i].corners.map(p=>p[1]);
+  const left=Math.min(...xs),right=Math.max(...xs),top=Math.min(...ys),bottom=Math.max(...ys);
+  if(pt.x>=left-tilePad&&pt.x<=right+tilePad&&pt.y>=top-tilePad&&pt.y<=bottom+tilePad){
+   const cx=(left+right)/2,cy=(top+bottom)/2,d=Math.hypot(pt.x-cx,pt.y-cy);
+   if(d<dist){best=i;dist=d}
+  }
+ }
+ return best;
+}
+function hingeAngularDelta(d,e){
+ const p=svgPoint(d.svg,e.clientX,e.clientY);
+ if(d.nearPivot){
+  // Fingers start at the pin: tangential travel still gives a clear turning direction.
+  const dx=p.x-d.p0.x,dy=p.y-d.p0.y;
+  return Math.atan2(dx*d.tangent[0]+dy*d.tangent[1],d.armRadius);
+ }
+ const a=Math.atan2(p.y-d.pivot[1],p.x-d.pivot[0]);
+ return Math.atan2(Math.sin(a-d.a0),Math.cos(a-d.a0));
+}
+app.addEventListener('pointerdown',e=>{
+ if(winning)return;
+ if(game==='hinge'){
+  const svg=e.target.closest('#hinge-board');if(!svg)return;
+  const i=hingePick(svg,e);if(i<1)return;
+  const geom=hingeGeom(state.d),pivot=geom[i].origin,p0=svgPoint(svg,e.clientX,e.clientY),poly=geom[i].corners;
+  const center=[poly.reduce((v,p)=>v+p[0],0)/4,poly.reduce((v,p)=>v+p[1],0)/4];
+  const ax=center[0]-pivot[0],ay=center[1]-pivot[1],armRadius=Math.max(.55,Math.hypot(ax,ay));
+  const tangent=[-ay/armRadius,ax/armRadius];
+  hDrag={i,svg,pivot,p0,nearPivot:Math.hypot(p0.x-pivot[0],p0.y-pivot[1])<.36,a0:Math.atan2(p0.y-pivot[1],p0.x-pivot[0]),armRadius,tangent,last:0,moved:false,token:animToken,pointerId:e.pointerId};
+  state.selected=i;
+  try{svg.setPointerCapture(e.pointerId)}catch(_){}
+  e.preventDefault();return;
+ }
+ if(game==='flip'){let p=e.target.closest('[data-flip-col]');if(!p)return;flipDrag={col:Number(p.dataset.flipCol),startX:e.clientX,lastX:e.clientX,moved:false,token:animToken};p.setPointerCapture?.(e.pointerId)}
+});
+app.addEventListener('pointermove',e=>{
+ if(hDrag&&game==='hinge'&&e.pointerId===hDrag.pointerId){
+  const d=hDrag,da=hingeAngularDelta(d,e);d.last=da;
+  d.moved ||= Math.abs(da)>.16;
+  // A dead zone, clamped movement, and 15-degree notches eliminate slippery free-spin.
+  const raw=Math.max(-90,Math.min(90,da*180/Math.PI));
+  let snapped=Math.abs(raw)<10?0:Math.sign(raw)*Math.min(90,Math.round(Math.abs(raw)/15)*15);
+  if(Math.abs(raw)>78)snapped=Math.sign(raw)*90;
+  d.svg.querySelectorAll('[data-piece]').forEach((el,i)=>{if(i>=d.i)el.setAttribute('transform',`rotate(${snapped} ${d.pivot[0]} ${d.pivot[1]})`)});
+  e.preventDefault();return;
+ }
+ if(flipDrag&&game==='flip'){flipDrag.lastX=e.clientX;if(Math.abs(e.clientX-flipDrag.startX)>17)flipDrag.moved=true}
+});
+function finishDrag(e){
+ if(hDrag&&e.pointerId===hDrag.pointerId){
+  const d=hDrag;hDrag=null;hingeIgnoreClickUntil=performance.now()+350;
+  if(e.type==='pointercancel'||game!=='hinge'||d.token!==animToken){if(game==='hinge')render();return}
+  state.selected=d.i;
+  if(Math.abs(d.last)>=.45){
+   const dir=Math.sign(d.last),old=state.d.slice(),j=d.i-1;old[j]=(old[j]+dir+4)%4;
+   if(hingeLegal(old)){history.hinge.push(state.d.slice());state.d=old;sound('fold')}
+   else{sound('wrong');toast('そこには重ねられない')}
+  }else if(d.moved){sound('tick')}
+  render();return;
+ }
+ if(flipDrag){let d=flipDrag;flipDrag=null;if(game!=='flip'||d.token!==animToken)return;state.selected=d.col;let dx=d.lastX-d.startX;if(d.moved&&Math.abs(dx)>36){let dir=dx>0?'L':'R',k=dx>0?d.col+1:d.col;flipDo(k,dir)}else{state.peeking=!state.peeking;render()}return}
+}
+app.addEventListener('pointerup',finishDrag);app.addEventListener('pointercancel',finishDrag);
 // Verification: uniqueness of minimum cut; no physical overlap in all hinge targets; all flip targets are fold-reachable.
 function verify(){for(const l of DATA.paper){let weak=l.weak.map(edgeId),min=Infinity,count=0;for(let mask=1;mask<1<<weak.length;mask++){let n=0;for(let t=mask;t;t&=t-1)n++;if(n>min)continue;let cut=new Set(weak.filter((_,i)=>mask&(1<<i)));if(paperValid(l,cut)){if(n<min){min=n;count=0}count++}}if(min!==l.sol.length||count!==1)throw Error('Paper uniqueness failure')}
 for(const l of DATA.hinge){if(!hingeLegal(l.goal)||hingeMatch(Array(l.n-1).fill(0),l.goal))throw Error('Hinge invalid goal')}
